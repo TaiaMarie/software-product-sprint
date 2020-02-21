@@ -1,3 +1,3 @@
 # Google Software Product Sprint
 
-"This repo contains Taia's portfolio and SPS projects."
+"This repo contains Taia's SPS projects and porfolio."
