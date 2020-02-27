@@ -13,13 +13,13 @@
 // limitations under the License.
 
 /**
- * Fetches a random quote from the server and adds it to the DOM.
+ * Fetches a random country from the server and adds it to the DOM.
  */
-function getRandomQuote() {
-  console.log('Fetching a random quote.');
+function getRandomDest() {
+  console.log('Fetching a random destination.');
 
   // The fetch() function returns a Promise because the request is asynchronous.
-  const responsePromise = fetch('/random-quote');
+  const responsePromise = fetch('/data');
 
   // When the request is complete, pass the response into handleResponse().
   responsePromise.then(handleResponse);
@@ -37,37 +37,16 @@ function handleResponse(response) {
   const textPromise = response.text();
 
   // When the response is converted to text, pass the result into the
-  // addQuoteToDom() function.
-  textPromise.then(addQuoteToDom);
+  // addDestToDom() function.
+  textPromise.then(addDestToDom);
 }
 
-/** Adds a random quote to the DOM. */
-function addQuoteToDom(quote) {
-  console.log('Adding quote to dom: ' + quote);
+/** Adds a random counrty to the DOM. */
+function addDestToDom(countries) {
+  console.log('Adding countries to dom: ' + countries);
 
-  const quoteContainer = document.getElementById('quote-container');
-  quoteContainer.innerText = quote;
+  const destContainer = document.getElementById('dest-container');
+  destContainer.innerText = countries;
 }
 
-/**
- * The above code is organized to show each individual step, but we can use an
- * ES6 feature called arrow functions to shorten the code. This function
- * combines all of the above code into a single Promise chain. You can use
- * whichever syntax makes the most sense to you.
- */
-function getRandomQuoteUsingArrowFunctions() {
-  fetch('/random-quote').then(response => response.text()).then((quote) => {
-    document.getElementById('quote-container').innerText = quote;
-  });
-}
 
-/**
- * Another way to use fetch is by using the async and await keywords. This
- * allows you to use the return values directly instead of going through
- * Promises.
- */
-async function getRandomQuoteUsingAsyncAwait() {
-  const response = await fetch('/random-quote');
-  const quote = await response.text();
-  document.getElementById('quote-container').innerText = quote;
-}
