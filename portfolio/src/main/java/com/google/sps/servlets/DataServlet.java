@@ -19,37 +19,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
+
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-    private List<String> countries;
-
-  @Override
-  public void init() {
-    countries = new ArrayList<>();
-    countries.add("Jordan");
-    countries.add("Greenland");
-    countries.add("Greece");
-    countries.add("Australia");
-    countries.add("Costa Rica");
-    countries.add("Iceland");
-    countries.add("New Zealand");
-    countries.add("Dominacan Republic");
-    countries.add("Austria");
-    countries.add("Cuba");
-    countries.add("Guyana");
-    countries.add("Trinidad and Tobago");
-    countries.add("Peru");
-  }
-
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String country = countries.get((int) (Math.random() * countries.size()));
     response.setContentType("text/html;");
-    response.getWriter().println("Maybe you should visit "+country+ "!");
+    response.getWriter().println("<h1>Hello Taia! </h1>");
   }
   
 }
