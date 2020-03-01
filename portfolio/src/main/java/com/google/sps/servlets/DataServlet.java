@@ -16,17 +16,36 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
       ArrayList<String> aString = new ArrayList<String>();
-      aString.add("Hawaii");
-      aString.add("Kansas");
-      aString.add("Washington");
+      String text = getParameter(request, "text-input", "");
+      aString.add(text);
+      
+      response.setContentType("application/json;");
       
       Gson gson = new Gson();
       String json = gson.toJson(aString);
 
-      response.setContentType("text/html;");
       response.getWriter().println(json);
 
     
+  }
+   @Override
+   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+      ArrayList<String> aString = new ArrayList<String>();
+      String text = getParameter(request, "text-input", "");
+      aString.add(text);
+      response.setContentType("application/json;");
+      Gson gson = new Gson();
+      String json = gson.toJson(aString);
+
+      response.getWriter().println(json);
+   }
+  
+  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+    String value = request.getParameter(name);
+    if (value == null) {
+      return defaultValue;
+    }
+    return value;
   }
   
 }
