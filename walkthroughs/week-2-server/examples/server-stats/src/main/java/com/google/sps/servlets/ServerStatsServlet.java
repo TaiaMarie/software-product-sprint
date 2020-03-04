@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 @WebServlet("/server-stats")
 public final class ServerStatsServlet extends HttpServlet {
 
@@ -33,9 +34,7 @@ public final class ServerStatsServlet extends HttpServlet {
     // Calculate server stats
     Date currentTime = new Date();
     long maxMemory = Runtime.getRuntime().maxMemory();
-    long usedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-
-    // Convert the server stats to JSON
+    long usedMemory = Runtime.getRuntime().totalMemory() - Runtime.         
     ServerStats serverStats = new ServerStats(startTime, currentTime, maxMemory, usedMemory);
     String json = convertToJson(serverStats);
 
