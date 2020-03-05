@@ -18,29 +18,25 @@ public class DataServlet extends HttpServlet {
       ArrayList<String> aString = new ArrayList<String>();
       String text = getParameter(request, "text-input", "");
       aString.add(text);
-      
       response.setContentType("application/json;");
-      
       Gson gson = new Gson();
       String json = gson.toJson(aString);
-
       response.getWriter().println(json);
+      }
 
-    
-  }
    @Override
    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-      ArrayList<String> aString = new ArrayList<String>();
-      String text = getParameter(request, "text-input", "");
-      aString.add(text);
-      response.setContentType("application/json;");
-      Gson gson = new Gson();
-      String json = gson.toJson(aString);
+       ArrayList<String> aString = new ArrayList<String>();
+       String text = getParameter(request, "text-input", "");
+       aString.add(text);
+       response.setContentType("application/json;");
+       Gson gson = new Gson();
+       String json = gson.toJson(aString);
+       response.getWriter().println(json);
+       }
 
-      response.getWriter().println(json);
-   }
-  
-  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+     @Override  
+    private String getParameter(HttpServletRequest request, String name, String defaultValue) {
     String value = request.getParameter(name);
     if (value == null) {
       return defaultValue;
