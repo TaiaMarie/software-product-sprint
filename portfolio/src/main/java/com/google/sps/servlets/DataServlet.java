@@ -18,6 +18,14 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+      //ArrayList<String> aString = new ArrayList<String>();
+      //String text = getParameter(request, "text-input", "");
+      //aString.add(text);
+      //response.setContentType("application/json;");
+      //Gson gson = new Gson();
+      //String json = gson.toJson(aString);
+      //response.getWriter().println(json);
+      // Get the request parameters.
       ArrayList<String> aString = new ArrayList<String>();
       String text = getParameter(request, "text-input", "");
       aString.add(text);
@@ -25,9 +33,13 @@ public class DataServlet extends HttpServlet {
       Gson gson = new Gson();
       String json = gson.toJson(aString);
       response.getWriter().println(json);
+     
 
-      
-      // Get the request parameters.
+      }
+
+   @Override
+   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
      String originalText = request.getParameter("text");
      String languageCode = request.getParameter("languageCode");
 
@@ -41,29 +53,16 @@ public class DataServlet extends HttpServlet {
      response.setContentType("text/html; charset=UTF-8");
      response.setCharacterEncoding("UTF-8");
      response.getWriter().println(translatedText);
-
-      }
-
-   @Override
-   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-       ArrayList<String> aString = new ArrayList<String>();
-       String text = getParameter(request, "text-input", "");
-       aString.add(text);
-       response.setContentType("application/json;");
-       Gson gson = new Gson();
-       String json = gson.toJson(aString);
-       response.getWriter().println(json);
+     System.out.println("Reached doGet()");
        }
 
-    @Override  
-    private String getParameter(HttpServletRequest request, String name, String defaultValue) {
-    String value = request.getParameter(name);
-    if (value == null) {
-      return defaultValue;
-    }
-    return value;
-  }
+     private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+     String value = request.getParameter(name);
+     if (value == null) {
+       return defaultValue;
+     }
+     return value;
+   }
 
 
   

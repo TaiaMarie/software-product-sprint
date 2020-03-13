@@ -22,7 +22,7 @@ function getJStats() {
     console.log('Hawaii');
     console.log('Kansas');
     console.log('Washington');
-  });
+  });}
   /** Creates an <li> element containing text. */
 function createListElement(text) {
   const liElement = document.createElement('li');
@@ -30,15 +30,17 @@ function createListElement(text) {
   return liElement;
 }
  function requestTranslation() {
-     const languageCode = document.getElementById('language').value;
-     const params = new URLSearchParams();
-     params.append('languageCode', languageCode);
-     fetch('/data', {
-          method: 'GET',
+        const text = document.getElementById('text').value;
+        const languageCode = document.getElementById('language').value;
+        const resultContainer = document.getElementById('result');
+        const params = new URLSearchParams();
+        params.append('text', text);
+        params.append('languageCode', languageCode);
+        fetch('/data', {
+          method: 'POST',
           body: params
         }).then(response => response.text())
         .then((translatedMessage) => {
-            resultContainer.innerText = translatedMessage;
-            });
-         }
-}
+          resultContainer.innerText = translatedMessage;
+        });
+      }
