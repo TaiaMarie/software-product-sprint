@@ -1,5 +1,8 @@
 package com.google.sps.servlets;
 
+import com.google.cloud.translate.Translate;
+import com.google.cloud.translate.TranslateOptions;
+import com.google.cloud.translate.Translation;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import com.google.gson.Gson;
@@ -22,10 +25,28 @@ public class DataServlet extends HttpServlet {
       Gson gson = new Gson();
       String json = gson.toJson(aString);
       response.getWriter().println(json);
+
+      
+      // Get the request parameters.
+     String originalText = request.getParameter("text");
+     String languageCode = request.getParameter("languageCode");
+
+     // Do the translation.
+     Translate translate = TranslateOptions.getDefaultInstance().getService();
+     Translation translation =
+     translate.translate(originalText, Translate.TranslateOption.targetLanguage(languageCode));
+     String translatedText = translation.getTranslatedText();
+
+     // Output the translation.
+     response.setContentType("text/html; charset=UTF-8");
+     response.setCharacterEncoding("UTF-8");
+     response.getWriter().println(translatedText);
+
       }
 
    @Override
    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
        ArrayList<String> aString = new ArrayList<String>();
        String text = getParameter(request, "text-input", "");
        aString.add(text);
@@ -35,7 +56,7 @@ public class DataServlet extends HttpServlet {
        response.getWriter().println(json);
        }
 
-     @Override  
+    @Override  
     private String getParameter(HttpServletRequest request, String name, String defaultValue) {
     String value = request.getParameter(name);
     if (value == null) {
@@ -43,5 +64,7 @@ public class DataServlet extends HttpServlet {
     }
     return value;
   }
+
+
   
 }
